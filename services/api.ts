@@ -32,9 +32,9 @@ let MOCK_SCREENS: ScreenSummary[] = [
 let MOCK_CONFIGS: Record<string, ScreenConfig> = {
   'demo-screen-1': {
     id: 'demo-screen-1',
-    clubId: 'gkti-no',
-    clubName: 'Golfklubb-IT',
-    clubUrl: 'golfklubb-it.com',
+    clubId: 'skigk',
+    clubName: 'Ski Golfklubb',
+    clubUrl: 'www.skig.no',
     logoUrl: '',
     updatedAt: new Date().toISOString(),
     slides: [
@@ -122,9 +122,9 @@ export const fetchScreenConfig = async (screenId: string): Promise<ScreenConfig>
 
 const createDefaultConfig = (id: string): ScreenConfig => ({
   id: id,
-  clubId: 'club-id',
-  clubName: 'Din Golfklubb',
-  clubUrl: 'www.dingolfklubb.no',
+  clubId: 'skigk',
+  clubName: 'Ski Golfklubb',
+  clubUrl: 'www.skig.no',
   slides: [
     {
       id: 'default-slide',
@@ -146,11 +146,11 @@ export const mockLogin = async (email: string): Promise<User> => {
 
     // If email is provided, we assume email/pass flow (simplified)
     // For this demo, we'll focus on the Google Popup flow which is triggered separately
-    return { id: 'fb-user', email, name: 'Firebase User', clubId: 'club-id' };
+    return { id: 'fb-user', email, name: 'Firebase User', clubId: 'skigk' };
   }
 
   await new Promise(resolve => setTimeout(resolve, 500));
-  return { id: 'user-123', email: email, name: 'Admin Bruker', clubId: 'club-id' };
+  return { id: 'user-123', email: email, name: 'Admin Bruker', clubId: 'skigk' };
 };
 
 export const loginWithGoogle = async (): Promise<User> => {
@@ -164,7 +164,7 @@ export const loginWithGoogle = async (): Promise<User> => {
     id: user.uid,
     email: user.email || '',
     name: user.displayName || 'Admin',
-    clubId: 'club-id' // In a real app, we would fetch this from a 'users' collection
+    clubId: 'skigk' // In a real app, we would fetch this from a 'users' collection
   };
 }
 

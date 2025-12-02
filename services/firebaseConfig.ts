@@ -6,12 +6,12 @@
 // 2. Erstatt hele objektet under med det du kopierte.
 
 export const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "your-app.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-app.firebasestorage.app",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyA-vPTense9tswdvv95rDIZkP52BneMc9M",
+  authDomain: "loftlogic-display.firebaseapp.com",
+  projectId: "loftlogic-display",
+  storageBucket: "loftlogic-display.firebasestorage.app",
+  messagingSenderId: "99504031016",
+  appId: "1:99504031016:web:4b6abcfa964af7553dfc1d"
 };
 
 // Denne flagger om vi skal bruke ekte database eller test-data
