@@ -32,9 +32,9 @@ let MOCK_SCREENS: ScreenSummary[] = [
 let MOCK_CONFIGS: Record<string, ScreenConfig> = {
   'demo-screen-1': {
     id: 'demo-screen-1',
-    clubId: 'club-id',
-    clubName: 'Din Golfklubb',
-    clubUrl: 'www.dingolfklubb.no',
+    clubId: 'gkti-no',
+    clubName: 'Golfklubb-IT',
+    clubUrl: 'golfklubb-it.com',
     logoUrl: '',
     updatedAt: new Date().toISOString(),
     slides: [
