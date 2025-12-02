@@ -1,0 +1,5 @@
+{
+  "name": "LoftLogic Display",
+  "description": "Digital Signage Display App for Golf Clubs. Runs on TV/Web, auto-rotates slides with widgets for GolfBox, Weather, and News.",
+  "requestFramePermissions": []
+}
