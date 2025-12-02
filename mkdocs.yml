@@ -1,0 +1,77 @@
+site_name: GKIT Digital Signage App
+site_description: Multi-tenant Digital Signage Platform for Golf Clubs
+site_author: Golfklubb-IT
+repo_url: https://github.com/Owe-S/GKIT-DigitalSignage-APP
+repo_name: GKIT-DigitalSignage-APP
+
+theme:
+  name: material
+  palette:
+    # Light mode
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Quick Start: getting-started/quickstart.md
+      - Installation: getting-started/installation.md
+      - Configuration: getting-started/configuration.md
+  - Deployment:
+      - Overview: deployment/overview.md
+      - New Club Setup: deployment/new-club.md
+      - Firebase Setup: deployment/firebase.md
+      - Google Cloud: deployment/google-cloud.md
+  - Architecture:
+      - Overview: architecture/overview.md
+      - Frontend: architecture/frontend.md
+      - Backend Services: architecture/backend.md
+      - Database: architecture/database.md
+  - Features:
+      - Display System: features/display.md
+      - Admin Dashboard: features/admin.md
+      - Widgets: features/widgets.md
+      - Slide Layouts: features/layouts.md
+  - API Reference:
+      - API Overview: api/overview.md
+      - Screen Configuration: api/screen-config.md
+      - Authentication: api/auth.md
+  - Contributing:
+      - Guidelines: contributing/guidelines.md
+      - Development Setup: contributing/development.md
