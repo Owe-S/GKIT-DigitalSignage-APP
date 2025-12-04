@@ -75,3 +75,4 @@ nav:
   - Contributing:
       - Guidelines: contributing/guidelines.md
       - Development Setup: contributing/development.md
+  - FAQ: faq.md

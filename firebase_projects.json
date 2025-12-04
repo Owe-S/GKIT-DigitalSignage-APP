@@ -1,0 +1,104 @@
+{
+  "status": "success",
+  "result": [
+    {
+      "projectId": "frivillig-kalendar-klubb",
+      "projectNumber": "998803304720",
+      "displayName": "Frivillig-kalendar-klubb",
+      "name": "projects/frivillig-kalendar-klubb",
+      "resources": {
+        "hostingSite": "frivillig-kalendar-klubb"
+      },
+      "state": "ACTIVE",
+      "etag": "1_3f9a2808-a468-4bac-8750-251696a7a0b7"
+    },
+    {
+      "projectId": "golfbilkontroll-skigk",
+      "projectNumber": "793476088060",
+      "displayName": "Golfbilkontroll SkiGK",
+      "name": "projects/golfbilkontroll-skigk",
+      "resources": {
+        "hostingSite": "golfbilkontroll-skigk"
+      },
+      "state": "ACTIVE",
+      "etag": "1_6620808d-259e-4325-8bb8-283fcab8572f"
+    },
+    {
+      "projectId": "golfklubb-it-website",
+      "projectNumber": "186711894198",
+      "displayName": "Golfklubb-IT Website",
+      "name": "projects/golfklubb-it-website",
+      "resources": {
+        "hostingSite": "golfklubb-it-website"
+      },
+      "state": "ACTIVE",
+      "etag": "1_96ef4a90-6b20-458b-a383-0c6c496a4709"
+    },
+    {
+      "projectId": "golfteam-time-eur",
+      "projectNumber": "635918436102",
+      "displayName": "GolfTeam-Time Eur",
+      "name": "projects/golfteam-time-eur",
+      "resources": {
+        "hostingSite": "golfteam-time-eur"
+      },
+      "state": "ACTIVE",
+      "etag": "1_024cac2c-bf34-4511-9202-db3828c6cd99"
+    },
+    {
+      "projectId": "loftlogic-display",
+      "projectNumber": "99504031016",
+      "displayName": "GKIT-DigitalSignage-APP",
+      "name": "projects/loftlogic-display",
+      "resources": {
+        "hostingSite": "loftlogic-display"
+      },
+      "state": "ACTIVE",
+      "etag": "1_a93d6c09-b062-4d32-b40a-696226f8662f"
+    },
+    {
+      "projectId": "soknadsportalen",
+      "projectNumber": "239196240335",
+      "displayName": "Soknadsportalen",
+      "name": "projects/soknadsportalen",
+      "resources": {
+        "hostingSite": "soknadsportalen"
+      },
+      "state": "ACTIVE",
+      "etag": "1_c8fdad54-01f4-4ec0-b8fe-93410fccfde6"
+    },
+    {
+      "projectId": "soknadsportalen-43311718-12286",
+      "projectNumber": "457710909845",
+      "displayName": "Firebase app",
+      "name": "projects/soknadsportalen-43311718-12286",
+      "resources": {
+        "hostingSite": "soknadsportalen-43311718-12286"
+      },
+      "state": "ACTIVE",
+      "etag": "1_3beba61d-f45a-43d2-91c8-cd50e266ae54"
+    },
+    {
+      "projectId": "studio-4823519397-4e256",
+      "projectNumber": "870247992648",
+      "displayName": "GolfTeam-Time",
+      "name": "projects/studio-4823519397-4e256",
+      "resources": {
+        "hostingSite": "studio-4823519397-4e256"
+      },
+      "state": "ACTIVE",
+      "etag": "1_af24cc02-d470-452f-9aa2-1daa5b2f6d2a"
+    },
+    {
+      "projectId": "workspace-ai-file-analyzer",
+      "projectNumber": "640170919209",
+      "displayName": "Workspace AI file analyzer",
+      "name": "projects/workspace-ai-file-analyzer",
+      "resources": {
+        "hostingSite": "workspace-ai-file-analyzer"
+      },
+      "state": "ACTIVE",
+      "etag": "1_9ade8662-7a61-4194-8f5e-3d4b455e64eb"
+    }
+  ]
+}

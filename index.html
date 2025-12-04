@@ -34,9 +34,24 @@
         to { width: 0%; }
       }
       
+      @keyframes slideIn {
+        from {
+          transform: translateX(400px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      
       .animate-progress {
         animation-timing-function: linear;
         animation-fill-mode: forwards;
+      }
+
+      .animate-slideIn {
+        animation: slideIn 0.3s ease-out;
       }
     </style>
   <script type="importmap">

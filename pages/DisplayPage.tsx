@@ -19,7 +19,7 @@ export const DisplayPage: React.FC = () => {
     let isMounted = true;
     const loadConfig = async () => {
       try {
-        const id = screenId || "demo-screen-1"; 
+        const id = screenId || "demo-screen-1";
         console.log("Loading config for:", id);
         const data = await fetchScreenConfig(id);
         if (isMounted) {
@@ -34,7 +34,7 @@ export const DisplayPage: React.FC = () => {
         }
       }
     };
-    
+
     loadConfig();
     return () => { isMounted = false; };
   }, [screenId]);
@@ -58,7 +58,7 @@ export const DisplayPage: React.FC = () => {
     return (
       <div className="h-screen w-screen flex flex-col items-center justify-center bg-slate-900 text-white">
         <Loader2 className="w-12 h-12 animate-spin text-blue-500 mb-4" />
-        <h1 className="text-2xl font-light tracking-wider">LOFTLOGIC</h1>
+        <h1 className="text-2xl font-light tracking-wider">GKIT</h1>
         <p className="text-slate-400 text-sm mt-2">Laster visning...</p>
       </div>
     );
@@ -88,25 +88,25 @@ export const DisplayPage: React.FC = () => {
 
   return (
     <main className="h-screen w-screen bg-slate-950 text-white overflow-hidden flex flex-col relative">
-      
+
       {/* Global Header */}
-      <Header 
-        clubName={config.clubName} 
-        clubUrl={config.clubUrl} 
-        logoUrl={config.logoUrl} 
+      <Header
+        clubName={config.clubName}
+        clubUrl={config.clubUrl}
+        logoUrl={config.logoUrl}
       />
 
       {/* Slide Container */}
       <div className="flex-1 relative overflow-hidden w-full fade-enter-active bg-slate-900">
         <SlideRenderer slide={currentSlide} clubName={config.clubName} />
-        
+
         {/* Progress Bar */}
         <SlideProgress duration={currentSlide.duration || 10} key={currentSlide.id} />
       </div>
 
       {/* Global Footer */}
       <Footer />
-      
+
     </main>
   );
 }
@@ -114,10 +114,10 @@ export const DisplayPage: React.FC = () => {
 const SlideProgress: React.FC<{ duration: number }> = ({ duration }) => {
   return (
     <div className="absolute bottom-0 left-0 h-1 bg-blue-600 z-40 animate-progress"
-         style={{ 
-           width: '100%', 
-           animation: `shrink ${duration}s linear forwards` 
-         }} 
+      style={{
+        width: '100%',
+        animation: `shrink ${duration}s linear forwards`
+      }}
     />
   );
 };

@@ -1,21 +1,25 @@
 
-import { ScreenConfig, SlideLayout, WidgetType, ScreenSummary, User, Slide } from '../types';
+import { ScreenConfig, SlideLayout, WidgetType, ScreenSummary, User, Slide, ClubSettings } from '../types';
 import { firebaseConfig, USE_FIREBASE } from './firebaseConfig';
 
 // --- FIREBASE IMPORTS (Dynamically loaded if needed) ---
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getFirestore, collection, getDocs, doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 // Initialize Firebase Instance
 let auth: any;
 let db: any;
+let storage: any;
 
 if (USE_FIREBASE) {
   try {
     const app = initializeApp(firebaseConfig);
     auth = getAuth(app);
+    auth = getAuth(app);
     db = getFirestore(app);
+    storage = getStorage(app);
     console.log("Firebase initialized successfully");
   } catch (e) {
     console.error("Failed to initialize Firebase. Check your firebaseConfig.ts", e);
@@ -138,19 +142,22 @@ const createDefaultConfig = (id: string): ScreenConfig => ({
   updatedAt: new Date().toISOString()
 });
 
-export const mockLogin = async (email: string): Promise<User> => {
-  // FIREBASE IMPLEMENTATION
-  if (USE_FIREBASE && auth) {
-    // Note: This function name 'mockLogin' is kept for compatibility with LoginPage.tsx, 
-    // but it performs real auth if configured.
+export const loginWithEmail = async (email: string, password: string): Promise<User> => {
+  if (!USE_FIREBASE || !auth) throw new Error("Firebase not configured");
 
-    // If email is provided, we assume email/pass flow (simplified)
-    // For this demo, we'll focus on the Google Popup flow which is triggered separately
-    return { id: 'fb-user', email, name: 'Firebase User', clubId: 'skigk' };
+  try {
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    const user = result.user;
+    return {
+      id: user.uid,
+      email: user.email || '',
+      name: user.displayName || 'Admin',
+      clubId: 'skigk' // In a real app, fetch from Firestore 'users' collection
+    };
+  } catch (error: any) {
+    console.error("Login failed:", error);
+    throw new Error(error.message || "Login failed");
   }
-
-  await new Promise(resolve => setTimeout(resolve, 500));
-  return { id: 'user-123', email: email, name: 'Admin Bruker', clubId: 'skigk' };
 };
 
 export const loginWithGoogle = async (): Promise<User> => {
@@ -167,6 +174,66 @@ export const loginWithGoogle = async (): Promise<User> => {
     clubId: 'skigk' // In a real app, we would fetch this from a 'users' collection
   };
 }
+
+export const logout = async (): Promise<void> => {
+  if (!USE_FIREBASE || !auth) return;
+  await signOut(auth);
+};
+
+export const getCurrentUserProfile = async (): Promise<User | null> => {
+  if (!USE_FIREBASE || !auth) return { id: 'mock-user', email: 'admin@demo.no', name: 'Demo Admin', clubId: 'skigk' };
+
+  const currentUser = auth.currentUser;
+  if (!currentUser) return null;
+
+  try {
+    // Try to fetch user profile from Firestore
+    if (db) {
+      const userDoc = await getDoc(doc(db, "users", currentUser.uid));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        return {
+          id: currentUser.uid,
+          email: currentUser.email || '',
+          name: userData.name || currentUser.displayName || 'Admin',
+          clubId: userData.clubId || 'skigk' // Fallback if clubId is missing
+        };
+      }
+    }
+
+    // If no profile exists, return basic info with default clubId
+    // In a real app, we might force a "Complete Profile" step here
+    return {
+      id: currentUser.uid,
+      email: currentUser.email || '',
+      name: currentUser.displayName || 'Admin',
+      clubId: 'skigk'
+    };
+  } catch (e) {
+    console.error("Error fetching user profile:", e);
+    return null;
+  }
+};
+
+export const fetchWeatherData = async (lat: number, lon: number) => {
+  try {
+    const response = await fetch(
+      `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}&lon=${lon}`,
+      {
+        headers: {
+          'User-Agent': 'GKIT-DigitalSignage/1.0 github.com/Owe-S/GKIT-DigitalSignage-APP'
+        }
+      }
+    );
+
+    if (!response.ok) throw new Error('Weather fetch failed');
+    return await response.json();
+  } catch (e) {
+    console.error("Error fetching weather:", e);
+    // Fallback mock data if API fails (e.g. rate limit)
+    return null;
+  }
+};
 
 export const fetchScreens = async (clubId: string): Promise<ScreenSummary[]> => {
   if (USE_FIREBASE && db) {
@@ -228,6 +295,81 @@ export const updateScreenConfig = async (config: ScreenConfig): Promise<boolean>
   MOCK_CONFIGS[config.id] = config;
   return true;
 }
+
+export const fetchClubSettings = async (clubId: string): Promise<ClubSettings> => {
+  if (USE_FIREBASE && db) {
+    try {
+      const docRef = doc(db, "clubs", clubId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        return docSnap.data() as ClubSettings;
+      } else {
+        // Create default settings if they don't exist
+        const defaultSettings: ClubSettings = {
+          clubId,
+          clubName: 'Ski Golfklubb',
+          clubUrl: 'www.skig.no',
+          logoUrl: '',
+          updatedAt: new Date().toISOString()
+        };
+        await setDoc(doc(db, "clubs", clubId), defaultSettings);
+        return defaultSettings;
+      }
+    } catch (e) {
+      console.error("Error fetching club settings:", e);
+      throw e;
+    }
+  }
+
+  // Mock fallback
+  await new Promise(resolve => setTimeout(resolve, 200));
+  return {
+    clubId,
+    clubName: 'Ski Golfklubb',
+    clubUrl: 'www.skig.no',
+    logoUrl: '',
+    updatedAt: new Date().toISOString()
+  };
+};
+
+export const updateClubSettings = async (settings: ClubSettings): Promise<boolean> => {
+  if (USE_FIREBASE && db) {
+    try {
+      await setDoc(doc(db, "clubs", settings.clubId), {
+        ...settings,
+        updatedAt: new Date().toISOString()
+      });
+      return true;
+    } catch (e) {
+      console.error("Error updating club settings:", e);
+      return false;
+    }
+  }
+
+  // Mock
+  await new Promise(resolve => setTimeout(resolve, 500));
+  return true;
+};
+
+export const uploadImage = async (file: File, path: string = 'uploads'): Promise<string> => {
+  if (!USE_FIREBASE || !storage) {
+    // Mock upload
+    console.log("Mock uploading file:", file.name);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    return URL.createObjectURL(file);
+  }
+
+  try {
+    const storageRef = ref(storage, `${path}/${Date.now()}_${file.name}`);
+    const snapshot = await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+    return downloadURL;
+  } catch (e) {
+    console.error("Upload failed:", e);
+    throw new Error("Image upload failed");
+  }
+};
 
 // Mock Data Helpers
 export const getMockTeeTimes = () => {

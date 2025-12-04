@@ -1,12 +1,12 @@
-# LoftLogic Display App
+# GKIT Digital Signage App
 
 Digital signage system for golf clubs. Built with React, Vite, and Firebase.
 Designed to run on Smart TVs, PC monitors, and tablets.
 
 ## 🚀 Live Access
 
-- **Display URL:** [https://loftlogic-display.web.app](https://loftlogic-display.web.app)
-- **Admin Panel:** [https://loftlogic-display.web.app/#/admin](https://loftlogic-display.web.app/#/admin)
+- **Display URL:** [https://gkit-digital-signage.web.app](https://gkit-digital-signage.web.app)
+- **Admin Panel:** [https://gkit-digital-signage.web.app/#/admin](https://gkit-digital-signage.web.app/#/admin)
 
 ## 📦 Deployment History
 

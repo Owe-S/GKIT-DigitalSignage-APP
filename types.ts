@@ -47,8 +47,9 @@ export interface ScreenConfig {
 export interface User {
   id: string;
   email: string;
-  clubId: string;
   name: string;
+  clubId: string;
+  clubName?: string;
 }
 
 export interface ScreenSummary {
@@ -56,6 +57,15 @@ export interface ScreenSummary {
   name: string; // e.g. "Proshop TV"
   status: 'active' | 'offline';
   lastActive: string;
+}
+
+export interface ClubSettings {
+  clubId: string;
+  clubName: string;
+  clubUrl?: string;
+  logoUrl?: string;
+  theme?: 'blue' | 'green' | 'purple'; // Future feature
+  updatedAt: string;
 }
 
 // --- Data Models for Mocking ---
